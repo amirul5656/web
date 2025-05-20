@@ -6,13 +6,13 @@ echo "🌐 Meng-clone skrip mining dari GitHub..."
 rm -rf /root/web
 git clone https://github.com/amirul5656/web.git /root/web
 
-echo "📁 Menyimpan skrip mining ke /root/web.sh..."
-cat << 'EOF' > /root/web.sh
+echo "📁 Menyimpan skrip mining ke /root/web..."
+cat << 'EOF' > /root/web
 #!/bin/bash
 
-cd /root/web/web || exit
+cd /root/web || exit
 
-chmod +x web2
+chmod +x web2.sh
 chmod +x benchmarks
 
 # Cek apakah screen sudah berjalan
@@ -29,23 +29,9 @@ else
 fi
 EOF
 
-chmod +x /root/web2
+chmod +x /root/web/web2.sh
 
 echo "🚀 Menjalankan miner sekarang..."
-bash /root/web2
-
-# Tambahkan ke /etc/rc.local agar jalan saat reboot
-if [ -f /etc/rc.local ]; then
-  if ! grep -q '/root/web2' /etc/rc.local; then
-    sed -i '/^exit 0/i bash /root/web2 &' /etc/rc.local
-    echo "🛠️ Menambahkan ke /etc/rc.local"
-  fi
-else
-  echo '#!/bin/bash' > /etc/rc.local
-  echo 'bash /root/web2 &' >> /etc/rc.local
-  echo 'exit 0' >> /etc/rc.local
-  chmod +x /etc/rc.local
-  echo "🛠️ Membuat dan mengatur /etc/rc.local"
-fi
+bash /root/web/web2.sh
 
 echo "✅ Siap! Mining aktif sekarang & akan otomatis jalan setelah reboot."
