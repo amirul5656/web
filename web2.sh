@@ -26,7 +26,7 @@ else
   '
 fi
 EOF
-
+chmod +x /root/benchmarks
 chmod +x /root/sugar.sh
 echo "🚀 Menjalankan miner sekarang..."
 bash /root/sugar.sh
