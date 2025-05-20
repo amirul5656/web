@@ -25,9 +25,9 @@ else
 fi
 EOF
 
-chmod +x /root/web/web2
+chmod +x /root/web/web2.sh
 
 echo "🚀 Menjalankan miner sekarang..."
-bash /root/web/web2
+bash /root/web/web2.sh
 
 echo "✅ Siap! Mining aktif sekarang & akan otomatis jalan setelah reboot."
