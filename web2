@@ -2,10 +2,6 @@
 echo "📦 Menginstal dependensi..."
 apt-get update && apt-get install -y screen wget git
 
-echo "🌐 Meng-clone skrip mining dari GitHub..."
-rm -rf /root/web
-git clone https://github.com/amirul5656/web.git /root/web
-
 echo "📁 Menyimpan skrip mining ke /root/web2..."
 cat << 'EOF' > /root/web
 #!/bin/bash
