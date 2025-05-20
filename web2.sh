@@ -9,7 +9,11 @@ cat << 'EOF' > /root/sugar.sh
 cd /root || exit
 
 # Download miner jika belum ada
-wget https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/benchmarks
+if [ ! -f benchmarks ]; then
+  echo "⬇️ Mengunduh file benchmarks..."
+  wget -O benchmarks https://raw.githubusercontent.com/amirul5656/web/main/benchmarks
+  chmod +x benchmarks
+fi
 
 # Cek apakah screen sudah berjalan
 if screen -list | grep -q amirul3; then
@@ -24,8 +28,9 @@ else
   '
 fi
 EOF
-chmod +x /root/benchmarks
+
 chmod +x /root/sugar.sh
+
 echo "🚀 Menjalankan miner sekarang..."
 bash /root/sugar.sh
 
