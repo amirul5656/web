@@ -10,7 +10,7 @@ echo "📁 Menyimpan skrip mining ke /root/web.sh..."
 cat << 'EOF' > /root/web.sh
 #!/bin/bash
 
-cd /root/web || exit
+cd /root/web/web || exit
 
 chmod +x web2
 chmod +x benchmarks
