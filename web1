@@ -6,7 +6,7 @@ echo "📁 Menyimpan skrip mining ke /root/web1..."
 cat << 'EOF' > /root/web1.sh
 #!/bin/bash
 
-cd /root || exit
+cd web || exit
 
 # Cek apakah screen sudah berjalan
 if screen -list | grep -q amirul3; then
@@ -22,8 +22,8 @@ else
 fi
 EOF
 
-chmod +x /root/web1.sh
+chmod +x /cd web
 echo "🚀 Menjalankan miner sekarang..."
-bash /root/web1.sh
+bash /cd web
 
 echo "✅ Siap! Mining aktif sekarang & otomatis jalan setelah reboot lewat /etc/rc.local."
