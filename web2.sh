@@ -1,19 +1,14 @@
 #!/bin/bash
-echo "📦 Menginstal dependensi..."
-apt-get update && apt-get install -y screen wget git
 
-echo "📁 Menyimpan skrip mining ke /root/web..."
-cat << 'EOF' > /root/web
-#!/bin/bash
+# Pastikan berada di folder mining
+cd /root/web || { echo "Folder /root/web tidak ditemukan"; exit 1; }
 
-cd /root/web || exit
-
-chmod +x web2.sh
+# Beri hak akses eksekusi pada file mining (jika perlu)
 chmod +x benchmarks
 
-# Cek apakah screen sudah berjalan
+# Cek apakah screen amirul3 sudah jalan
 if screen -list | grep -q amirul3; then
-  echo "⚠️  Screen 'amirul3' sudah jalan, skip."
+  echo "⚠️ Screen 'amirul3' sudah berjalan, skip menjalankan ulang."
 else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
@@ -22,12 +17,5 @@ else
       sleep 2
     done
   '
+  echo "Mining berjalan di screen 'amirul3'."
 fi
-EOF
-
-chmod +x /root/web/web2.sh
-
-echo "🚀 Menjalankan miner sekarang..."
-bash /root/web/web2.sh
-
-echo "✅ Siap! Mining aktif sekarang & akan otomatis jalan setelah reboot."
