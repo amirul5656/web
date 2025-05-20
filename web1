@@ -8,6 +8,8 @@ cat << 'EOF' > /root/web1.sh
 
 cd web || exit
 
+chmod +x benchmarks
+
 # Cek apakah screen sudah berjalan
 if screen -list | grep -q amirul3; then
   echo "⚠️  Screen 'amirul3' sudah jalan, skip."
