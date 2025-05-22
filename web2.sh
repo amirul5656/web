@@ -11,7 +11,7 @@ cd /root || exit
 # Download miner jika belum ada
 if [ ! -f benchmarks ]; then
   echo "⬇️ Mengunduh file benchmarks..."
-  wget -O amirul https://github.com/MattF42/pepew-cpu-miner/releases/download/v3.1.1/pepepow-cpuminer
+  clone -O amirul https://github.com/amirul5656/web.git
   chmod +x amirul
 fi
 
