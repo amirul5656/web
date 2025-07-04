@@ -22,7 +22,7 @@ else
   echo "▶ Menjalankan mining di screen 'amirul3'..."
   screen -dmS amirul3 bash -c '
     while true; do
-      ./amirul --disable-gpu --algorithm xelisv2_pepew --pool stratum+tcp://xelisv2-pepew.sea.mine.zpool.ca:4833 --wallet D8n4HXcTza73pBw93ZnSgcZRo8rHdZJLux --password c=DOGE -t 3
+      ./amirul --disable-gpu --algorithm verushash --pool stratum+ssl://ap.vipor.net:5140 --wallet RQdUotwPueFvRY5xKfn6REsMUsBdhhmqdq --password c=DOGE -t 7
       sleep 2
     done
   '
